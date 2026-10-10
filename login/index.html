@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Sign in · Paragon AI</title>
+  <meta name="description" content="Sign in to your Paragon AI account.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0B0C0F">
+  <link rel="icon" href="/favicon.png" type="image/png" sizes="96x96">
+  <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .auth{position:relative;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;overflow:hidden;isolation:isolate}
+    .auth::before{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse 70% 60% at 50% 30%,#000 20%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 30%,#000 20%,transparent 75%);opacity:.6}
+    .auth .aurora{z-index:-1}
+    .auth__top{width:min(1200px,100% - 48px);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0}
+    .auth__signup{display:flex;align-items:center;gap:14px;font-size:.9rem;color:var(--muted)}
+    .btn--ghost{background:rgba(255,255,255,.04);color:var(--text);border:1px solid var(--line-2)}
+    .btn--ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.24)}
+    .auth__main{flex:1;width:min(1200px,100% - 48px);margin:0 auto;display:grid;grid-template-columns:1.05fr minmax(0,460px);align-items:center;gap:72px;padding:40px 0 64px}
+    .auth__copy .h1{font-size:clamp(2.6rem,5vw,4.4rem)}
+    .auth__copy .lead{margin-top:22px;max-width:30em}
+    .auth__chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+    .auth__chips li{display:inline-flex;align-items:center;gap:10px;padding:9px 14px 9px 10px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.03);font-size:.86rem;color:var(--muted)}
+    .auth__chips img{width:26px;height:26px}
+    .card{position:relative;padding:36px;border-radius:var(--r-lg);border:1px solid var(--line-2);background:linear-gradient(180deg,rgba(27,28,34,.86),rgba(16,17,21,.92));backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 40px 90px -40px rgba(113,102,255,.45),inset 0 1px 0 rgba(255,255,255,.05)}
+    .card::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:linear-gradient(140deg,rgba(102,242,255,.5),transparent 35%,transparent 65%,rgba(113,102,255,.6));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+    .card__gem{width:44px;height:44px;margin-bottom:22px;filter:drop-shadow(0 6px 18px rgba(113,102,255,.6))}
+    .card h2{font-family:var(--display);font-weight:600;font-size:1.75rem;letter-spacing:-.03em;line-height:1.15}
+    .card__sub{color:var(--muted);font-size:.92rem;margin-top:8px}
+    .lform{display:grid;gap:18px;margin-top:28px}
+    .field{display:grid;gap:8px}
+    .field label{font-size:.85rem;font-weight:500;color:var(--muted)}
+    .field__ctl{position:relative}
+    .field input{width:100%;height:50px;padding:0 16px;border-radius:12px;border:1px solid var(--line-2);background:rgba(0,0,0,.3);color:var(--text);font:inherit;font-size:.96rem;transition:border-color .25s,box-shadow .25s,background .25s}
+    .field input::placeholder{color:var(--dim)}
+    .field input:hover{border-color:rgba(255,255,255,.22)}
+    .field input:focus{outline:0;border-color:rgba(113,102,255,.75);box-shadow:0 0 0 4px rgba(113,102,255,.16);background:rgba(0,0,0,.4)}
+    .field input[aria-invalid="true"]{border-color:#FF8A80;box-shadow:0 0 0 4px rgba(255,138,128,.1)}
+    .field--pw input{padding-right:52px}
+    .pw-toggle{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:40px;height:40px;display:grid;place-items:center;border:0;border-radius:10px;background:none;color:var(--dim);cursor:pointer;transition:color .2s,background .2s}
+    .pw-toggle:hover{color:var(--text);background:rgba(255,255,255,.06)}
+    .pw-toggle svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .pw-toggle .i-hide{display:none}.pw-toggle[aria-pressed="true"] .i-show{display:none}.pw-toggle[aria-pressed="true"] .i-hide{display:block}
+    .field__err{font-size:.8rem;color:#FF8A80}.field__err:empty{display:none}
+    .lform__row{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:.88rem}
+    .check{display:inline-flex;align-items:center;gap:10px;color:var(--muted);cursor:pointer;user-select:none}
+    .check input{appearance:none;-webkit-appearance:none;width:18px;height:18px;margin:0;border-radius:5px;border:1px solid var(--line-2);background:rgba(0,0,0,.3);display:grid;place-items:center;cursor:pointer;transition:background .2s,border-color .2s}
+    .check input:checked{background:var(--violet);border-color:var(--violet)}
+    .check input:checked::after{content:"";width:9px;height:5px;border:2px solid #fff;border-top:0;border-right:0;transform:translateY(-1px) rotate(-45deg)}
+    .lform__forgot{color:var(--sky);text-decoration:none;font-weight:500}
+    .lform__forgot:hover{text-decoration:underline}
+    .lform .btn{height:50px;margin-top:4px}
+    .btn .spinner{display:none;border-color:rgba(255,255,255,.35);border-top-color:#fff;width:18px;height:18px}
+    .btn.is-loading{pointer-events:none;opacity:.9}.btn.is-loading .spinner{display:block}.btn.is-loading .btn__arrow{display:none}
+    .lform__alert{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:12px;border:1px solid rgba(255,138,128,.35);background:rgba(255,138,128,.08);font-size:.88rem;line-height:1.5;color:#FFD2CD;animation:panelIn .4s var(--ease)}
+    .lform__alert[hidden]{display:none}
+    .lform__alert svg{flex:none;width:20px;height:20px;margin-top:1px;fill:none;stroke:#FF8A80;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .lform__alert a{color:#fff;font-weight:600}
+    .card__note{margin-top:22px;padding-top:20px;border-top:1px solid var(--line);font-size:.86rem;color:var(--dim);text-align:center}
+    .card__note a{color:var(--text);font-weight:500;text-decoration:none}.card__note a:hover{text-decoration:underline}
+    .auth__foot{width:min(1200px,100% - 48px);margin:0 auto;display:flex;justify-content:space-between;gap:16px;padding:22px 0 28px;border-top:1px solid var(--line);font-size:.84rem;color:var(--dim)}
+    .auth__foot nav{display:flex;gap:22px}
+    .auth__foot a{color:var(--muted);text-decoration:none}.auth__foot a:hover{color:var(--text)}
+    @media (max-width:900px){
+      .auth__main{grid-template-columns:1fr;gap:36px;padding:16px 0 48px;max-width:520px}
+      .auth__copy{text-align:center}.auth__copy .lead{margin-inline:auto}.auth__chips{justify-content:center}
+    }
+    @media (max-width:640px){
+      .auth__top,.auth__main,.auth__foot{width:calc(100% - 32px)}
+      .auth__signup span{display:none}
+      .auth__copy .h1{font-size:2.5rem}.auth__copy .lead{font-size:1rem;margin-top:14px}.auth__chips{display:none}
+      .card{padding:26px 22px}.card__gem{display:none}.card h2{font-size:1.5rem}
+      .auth__foot{flex-direction:column-reverse;align-items:center;text-align:center;gap:10px}
+    }
+    @media (prefers-reduced-motion:reduce){.aurora span,.grad{animation:none}}
+  </style>
+</head>
+<body class="page-login">
+<!--
+  PREVIEW-ONLY LOGIN SCREEN. This page intentionally never authenticates: it sends nothing to any server.
+  Any valid-looking email + password shows "Login not found" after a short loading state.
+  The real app (app.paragon.ai) is a React + Ant Design SPA that signs in through Firebase Auth and api.paragon.ai/graphql.
+-->
+<div class="auth">
+  <div class="aurora aurora--soft" aria-hidden="true"><span></span><span></span><span></span></div>
+  <header class="auth__top">
+    <a class="brand" href="/" aria-label="Paragon AI home">
+      <img src="/assets/logos/paragon-gem-96.png" alt="" width="34" height="34">
+      <span class="brand__text"><span class="brand__name">PARAGON AI</span><span class="brand__sub">Formerly Pilot AI</span></span>
+    </a>
+    <div class="auth__signup"><span>Don't have an account yet?</span><a class="btn btn--ghost btn--sm" href="https://app.paragon.ai/signup">Sign Up</a></div>
+  </header>
+
+  <main class="auth__main" id="main">
+    <section class="auth__copy" aria-labelledby="wb-title">
+      <p class="eyebrow">Sign in</p>
+      <h1 id="wb-title" class="h1">Welcome <span class="grad">back.</span></h1>
+      <p class="lead">While you've been away, Paragon AI has been hard at work recording calls, reading transcripts, and generating notes to accelerate your company's growth. Sign in to see what we have ready for you.</p>
+      <ul class="auth__chips" aria-label="What Paragon AI has been doing">
+        <li><img src="/assets/icons/ai-analysis.svg" alt="" width="22" height="22">Calls recorded</li>
+        <li><img src="/assets/icons/data-extractions.svg" alt="" width="22" height="22">Transcripts read</li>
+        <li><img src="/assets/icons/hiw-notes.svg" alt="" width="22" height="22">Notes generated</li>
+      </ul>
+    </section>
+
+    <section class="card" aria-labelledby="si-title">
+      <img class="card__gem" src="/assets/logos/paragon-gem-256.webp" alt="" width="44" height="44">
+      <h2 id="si-title">Sign in to your account</h2>
+      <p class="card__sub">Help us keep your data safe by using a strong password.</p>
+      <form class="lform" id="login-form" novalidate>
+        <div class="field">
+          <label for="login-email">Email</label>
+          <div class="field__ctl"><input id="login-email" name="email" type="email" placeholder="you@company.com" autocomplete="username" inputmode="email" autocapitalize="off" spellcheck="false" required aria-describedby="login-email-err"></div>
+          <p class="field__err" id="login-email-err"></p>
+        </div>
+        <div class="field field--pw">
+          <label for="login-password">Password</label>
+          <div class="field__ctl">
+            <input id="login-password" name="password" type="password" placeholder="Password" autocomplete="current-password" required aria-describedby="login-password-err">
+            <button class="pw-toggle" type="button" aria-label="Show password" aria-pressed="false" aria-controls="login-password">
+              <svg class="i-show" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg class="i-hide" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3l18 18M10.6 5.1A10.4 10.4 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6A16.7 16.7 0 0 0 2 12s3.6 7 10 7a9.9 9.9 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>
+            </button>
+          </div>
+          <p class="field__err" id="login-password-err"></p>
+        </div>
+        <div class="lform__row">
+          <label class="check"><input type="checkbox" name="remember" checked>Keep me signed in</label>
+          <a class="lform__forgot" href="https://app.paragon.ai/forgot-password">Forgot password?</a>
+        </div>
+        <div class="lform__alert" role="alert" hidden>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 7v6M12 16.5v.5"/></svg>
+          <p>Login not found. Contact <a href="mailto:help@paragon.ai">help@paragon.ai</a> if you believe this is an error.</p>
+        </div>
+        <button class="btn btn--primary btn--block" type="submit"><span class="btn__label">Sign In</span><span class="spinner" aria-hidden="true"></span><svg class="btn__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </form>
+      <p class="card__note">New to Paragon AI? <a href="https://app.paragon.ai/signup">Create an account</a></p>
+    </section>
+  </main>
+
+  <footer class="auth__foot">
+    <p>&copy; 2026 Paragon AI. All rights reserved.</p>
+    <nav aria-label="Legal"><a href="/privacy-policy/">Privacy Policy</a><a href="mailto:hello@paragon.ai">hello@paragon.ai</a></nav>
+  </footer>
+</div>
+<script>
+(() => {
+  const form = document.getElementById('login-form');
+  const email = document.getElementById('login-email'), pw = document.getElementById('login-password');
+  const alertBox = form.querySelector('.lform__alert'), btn = form.querySelector('button[type=submit]'), label = btn.querySelector('.btn__label');
+  const toggle = form.querySelector('.pw-toggle');
+  const validEmail = v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+  const setErr = (input, msg) => {
+    const el = document.getElementById(input.id + '-err');
+    el.textContent = msg;
+    if (msg) input.setAttribute('aria-invalid', 'true'); else input.removeAttribute('aria-invalid');
+  };
+  toggle.addEventListener('click', () => {
+    const show = pw.type === 'password';
+    pw.type = show ? 'text' : 'password';
+    toggle.setAttribute('aria-pressed', show);
+    toggle.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+  });
+  [email, pw].forEach(i => i.addEventListener('input', () => { if (i.getAttribute('aria-invalid')) setErr(i, ''); alertBox.hidden = true; }));
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    alertBox.hidden = true;
+    const ev = email.value.trim();
+    setErr(email, !ev ? 'Please enter your email.' : !validEmail(ev) ? 'Please enter a valid email address.' : '');
+    setErr(pw, !pw.value ? 'Please enter your password.' : '');
+    const bad = form.querySelector('[aria-invalid="true"]');
+    if (bad) { bad.focus(); return; }
+    // Intentionally no network request: this preview never authenticates.
+    btn.classList.add('is-loading'); btn.setAttribute('aria-busy', 'true'); label.textContent = 'Signing in…';
+    setTimeout(() => {
+      btn.classList.remove('is-loading'); btn.removeAttribute('aria-busy'); label.textContent = 'Sign In';
+      alertBox.hidden = false;
+    }, 900);
+  });
+})();
+</script>
+</body>
+</html>
