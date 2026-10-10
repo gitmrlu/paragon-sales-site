@@ -1,6 +1,6 @@
 /* Paragon AI site */
 (() => {
-  // Calendly link used by every "Book a Demo" button (the live site used this one on Pricing/Contact).
+  // Calendly link used by every "Book a Demo" button (the live site used this one on Contact).
   const DEMO_URL = 'https://calendly.com/evan-getpilot/30min';
   // Contact form endpoint (e.g. 'https://formspree.io/f/XXXX'). null = open the visitor's email app instead.
   const CONTACT_ENDPOINT = null;
@@ -137,21 +137,6 @@
     if (!validEmail(v)) { err.textContent = 'Please enter a valid email address.'; input.setAttribute('aria-invalid', 'true'); input.focus(); return; }
     err.textContent = ''; input.removeAttribute('aria-invalid'); openDemo(v);
   }));
-
-  /* pricing toggle */
-  const billing = $('.billing');
-  if (billing) {
-    const set = mode => {
-      billing.classList.toggle('is-yearly', mode === 'yearly');
-      $$('button', billing).forEach(b => b.setAttribute('aria-checked', b.dataset.billing === mode));
-      $$('[data-monthly]').forEach(el => {
-        el.textContent = el.dataset[mode];
-        if (el.classList.contains('plan__amt')) { el.classList.remove('is-swap'); void el.offsetWidth; el.classList.add('is-swap'); }
-      });
-    };
-    $$('button', billing).forEach(b => b.addEventListener('click', () => set(b.dataset.billing)));
-    billing.addEventListener('keydown', e => { if (['ArrowLeft', 'ArrowRight'].includes(e.key)) { const next = billing.classList.contains('is-yearly') ? 'monthly' : 'yearly'; set(next); $(`[data-billing="${next}"]`, billing).focus(); } });
-  }
 
   /* contact form */
   const cf = $('#contact-form');
