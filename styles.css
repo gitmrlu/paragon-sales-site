@@ -388,7 +388,7 @@ body.modal-open{overflow:hidden}
   .caps{grid-template-columns:1fr}
   .firms{grid-template-columns:repeat(2,1fr)}
   .firm{min-height:80px;font-size:1rem;white-space:normal;text-align:center;padding:14px 10px}
-  .firm:last-child{grid-column:1/-1}
+  .firm:last-child:nth-child(odd){grid-column:1/-1}
   .firm--caps{font-size:.72rem;letter-spacing:.14em}.firm--wide{font-size:.74rem;letter-spacing:.2em}.firm--serif{font-size:1.12rem}
   .firm--yc svg{width:24px;height:24px}
   .angels{grid-template-columns:1fr 1fr;gap:8px}
